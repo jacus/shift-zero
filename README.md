@@ -1,5 +1,7 @@
 # Shift Zero
 
+![Shift left, all the way to zero: from "test last" through CI, dev and TDD to testability designed in before the first line, built as thin vertical end-to-end slices.](assets/shift-zero-hero.gif)
+
 **Quality from start.** Shift-left pushed to its limit: CI runs *inside the
 agent's session*, before its first answer — not in a pipeline an hour later.
 
