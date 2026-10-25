@@ -1,0 +1,10 @@
+{
+  "name": "shift-zero",
+  "displayName": "Shift Zero",
+  "version": "0.1.0",
+  "description": "Quality from start: CI in the session. Verify every change end to end before replying, and loudly call out what blocks quality.",
+  "author": { "name": "jacus" },
+  "repository": "https://github.com/jacus/shift-zero",
+  "license": "MIT",
+  "keywords": ["testing", "e2e", "quality", "shift-left", "ci", "doctrine"]
+}

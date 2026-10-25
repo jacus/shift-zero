@@ -1,0 +1,11 @@
+{
+  "name": "shift-zero",
+  "owner": { "name": "jacus" },
+  "plugins": [
+    {
+      "name": "shift-zero",
+      "source": "./",
+      "description": "Quality from start: CI in the session."
+    }
+  ]
+}
