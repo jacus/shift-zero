@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jacus/shift-zero/protocol/evidence.schema.json",
+  "title": "Shift Zero evidence",
+  "description": "What the agent ran this turn, replayed by the gate before the reply is accepted.",
+  "type": "object",
+  "required": ["version", "diff_hash", "slice", "checks", "verdict"],
+  "properties": {
+    "version": { "const": 1 },
+    "diff_hash": {
+      "type": "string",
+      "description": "Output of `szero hash` for the working tree this evidence covers."
+    },
+    "slice": {
+      "type": "string",
+      "description": "The vertical increment this turn delivers, in one sentence."
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "kind", "cmd", "expect_exit"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "enum": ["e2e", "integration", "unit", "static"] },
+          "surface": { "enum": ["cli", "http", "browser", "library", "message", "other"] },
+          "cmd": { "type": "string", "description": "Shell command, run from the repo root." },
+          "expect_exit": { "type": "integer" },
+          "timeout_s": { "type": "integer", "minimum": 1, "default": 300 },
+          "revert_check": {
+            "type": "object",
+            "description": "Proof the check fails without the change (doctrine R3).",
+            "required": ["failed_on_old_code"],
+            "properties": {
+              "failed_on_old_code": { "type": "boolean" },
+              "how": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "not_covered": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What this turn did not verify, honestly."
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["missing", "why", "ask"],
+        "properties": {
+          "missing": { "type": "string" },
+          "why": { "type": "string" },
+          "ask": { "type": "string" }
+        }
+      }
+    },
+    "tests_weakened": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Any existing test edited, skipped or loosened, with the human's agreement (doctrine R9)."
+    },
+    "verdict": { "enum": ["VERIFIED", "UNVERIFIED", "BLOCKED"] }
+  }
+}
