@@ -76,6 +76,22 @@ Every turn ends with one of: **VERIFIED** (gate passed), **UNVERIFIED**
 verification — and what the human must provide). Never dress up
 UNVERIFIED as done.
 
+### R11. Keep the project port current
+`.shift-zero/PORT.md` is a living, project-specific testing playbook, not
+a one-time setup artifact. On every behavior-changing turn, review it
+against the current working tree. Update it whenever a change affects the
+stack, dependencies, startup or teardown, seed data, test commands,
+available interfaces, test drivers, or anything else that changes how the
+project is run or verified. Prove every changed command by running it.
+If the setup is unchanged, leave the file alone; do not rewrite it just
+for the sake of rewriting it.
+
+If a change makes the port inaccurate but the environment prevents you
+from validating the replacement instructions, record the blocker and the
+smallest ask in the port and evidence. Never silently rely on stale
+instructions. The gate currently replays evidence but does not semantically
+audit whether PORT.md is current, so the agent must perform this review.
+
 ---
 
 ## Part II — Demands on the human
@@ -133,6 +149,7 @@ Any VERIFIED turn with e2e evidence resets the ladder to L0.
 
 The doctrine is stack-agnostic. On first run in a project the agent ports
 it (see `protocol/port.md`) and writes `.shift-zero/PORT.md`: how *this*
-project boots, seeds, runs e2e, and what blocks it. Worked examples in
-`examples/` show the same rules applied to different stacks — learn the
-pattern, not the syntax.
+project boots, seeds, runs e2e, and what blocks it. Revisit and maintain
+that file as required by R11; do not assume initial porting is the last
+time it needs attention. Worked examples in `examples/` show the same
+rules applied to different stacks — learn the pattern, not the syntax.
