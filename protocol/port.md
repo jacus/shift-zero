@@ -1,10 +1,30 @@
 # Porting protocol
 
-Run once per project (and again when the stack changes). The goal: turn
-the stack-agnostic doctrine into concrete, **proven** commands for this
-repo. The output is `.shift-zero/PORT.md`, committed with the project.
+Run on first setup and revisit whenever the project stack or verification
+setup changes. The goal is to turn the stack-agnostic doctrine into
+concrete, **proven** commands for this repo. The output is
+`.shift-zero/PORT.md`, committed with the project and maintained as the
+project evolves.
 
-## Steps
+## When to refresh PORT.md
+
+Review the port on every behavior-changing turn. Update it whenever a
+change affects any of the following:
+- languages, frameworks, package managers, or runtime/dependency versions;
+- how the app is started, seeded, or torn down;
+- test commands, test locations, test drivers, or scoped-test recipes;
+- interfaces available for end-to-end checks (CLI, HTTP, browser, queue,
+  library API, and so on);
+- environment requirements, fixtures, services, or other prerequisites for
+  reproducing verification.
+
+Do not rewrite it for ordinary feature work when these details are
+unchanged. If a relevant change is made, prove each changed command by
+running it and update the documented blockers/testability debt as needed.
+If a command cannot be proven because the environment is missing something,
+mark it unproven and record the blocker; never present it as working.
+
+## Initial porting steps
 
 1. **Detect.** Identify languages, frameworks, package managers, how the
    app is started, which interfaces it exposes (CLI, HTTP, UI, queue,

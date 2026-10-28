@@ -24,20 +24,27 @@ command, one passing e2e test), building that skeleton *is* the first task.
 
 ## Every turn that changes behavior
 1. Name the vertical slice and how it will be observed end to end.
-2. Write the e2e check first when practical.
-3. Implement.
-4. Run the scoped checks from `.shift-zero/PORT.md`.
-5. Revert check: show the new check fails on the old code.
-6. Write `.shift-zero/evidence.json` (schema: `protocol/evidence.schema.json`),
+2. Review `.shift-zero/PORT.md` against the current working tree. Update it
+   if the stack, dependencies, startup/teardown, seed data, test commands,
+   interfaces, test drivers, or verification workflow changed. Prove every
+   changed command by running it. If nothing relevant changed, leave the
+   port untouched.
+3. Write the e2e check first when practical.
+4. Implement.
+5. Run the scoped checks from the current `.shift-zero/PORT.md`.
+6. Revert check: show the new check fails on the old code.
+7. Write `.shift-zero/evidence.json` (schema: `protocol/evidence.schema.json`),
    with `diff_hash` from `szero hash`.
-7. Run `szero gate` (hooks may do this for you). Fix what it reports.
-8. Reply with the verdict line **first**:
+8. Run `szero gate` (hooks may do this for you). Fix what it reports.
+9. Reply with the verdict line **first**:
    `SHIFT ZERO: <VERIFIED|UNVERIFIED|BLOCKED> | L<n> — <what was proven / what blocks>`
 
 Turns that change nothing skip the loop and say so in one line.
 
 ## Non-negotiables
 - At least one e2e check per behavior change. Units supplement, never substitute.
+- Keep `.shift-zero/PORT.md` accurate as the project evolves; the gate does not
+  currently detect stale port instructions, so this review is an agent duty.
 - Never edit, skip or loosen an existing test to get green without the
   human's explicit agreement — and record it in `tests_weakened`.
 - Name crappy tests every time: mocking the unit under test, empty or

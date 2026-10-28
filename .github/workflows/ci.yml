@@ -2,15 +2,13 @@ name: ci
 on: [push, pull_request]
 jobs:
   gate-e2e:
+    # Follow the current GitHub-hosted Ubuntu image and test on current Python.
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: ["3.9", "3.13"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python }}
+          python-version: "3.14"
       - run: |
           git config --global user.email ci@example.com
           git config --global user.name ci
